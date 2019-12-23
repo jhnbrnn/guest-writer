@@ -282,7 +282,7 @@ Once you’re back on the Routes page, click “Create” in the left column hea
 
 You’ll be redirected back to the Routes page; click “POST” under the “/wish-list-service” route in the left column to open up the details card.
 
-You’ll first need to configure the route to actually call your Lambda. TO do so, click “Attach Integration” near the bottom of the details card. This will route you to the Integrations section of the API; once there, select “wish-list-service” from the dropdown of existing integrations and click “Attach Integration”.
+You’ll first need to configure the route to actually call your Lambda. To do so, click “Attach Integration” near the bottom of the details card. This will route you to the Integrations section of the API; once there, select “wish-list-service” from the dropdown of existing integrations and click “Attach Integration”.
 
 ![Attaching Lambda integration to your API](images/jwt7.png)
 

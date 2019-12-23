@@ -14,7 +14,7 @@ related:
 
 **TL;DR:** JSON Web Tokens (JWTs) can be used to authorize requests to HTTP APIs built on Amazon Web Services’ API Gateway. This tutorial will walk you through integrating Auth0 with such an HTTP API.
 
-# DRAFT 1.2 - Securing AWS HTTP APIs with JWT Authorizers
+# Securing AWS HTTP APIs with JWT Authorizers
 ​
 **TL;DR** JSON Web Tokens (JWTs) can be used to authorize requests to HTTP APIs built on Amazon Web Services’ API Gateway. This tutorial will walk you through integrating Auth0 with such an HTTP API.
 ​
@@ -352,5 +352,7 @@ Executing that request should return a 201 as before - and if it does, you’ve 
 In this tutorial, you’ve built a functional API using AWS Lambda, DynamoDB, and API Gateway. You’ve then added a JWT Authorizer, restricting access for POST requests to your endpoint to users that have authenticated with an Auth0 application. 
 
 From here, there are a lot of directions you could go. For example, you could expand the functional capabilities of your API in the Lambda itself, or you could refine access by adding authorization scopes within Auth0 and restricting your API endpoints or methods using role-based access control.
+
+The sample code used to run the lambda can be found here: https://github.com/brennanjohn/a0-aws-jwt
 
 Happy building!

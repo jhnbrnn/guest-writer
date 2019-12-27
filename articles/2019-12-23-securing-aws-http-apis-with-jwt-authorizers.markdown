@@ -19,7 +19,7 @@ related:
 ​
 ## An introduction to HTTP APIs in API Gateway
 ​
-AWS API Gateway offers several solutions for building scalable APIs. HTTP APIs ([link](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html)) are a simple form of API that proxies requests to either another HTTP endpoint or an AWS Lambda. Unlike API Gateway's REST APIs, HTTP APIs can’t leverage other AWS services, such as AWS Identity and Access Management (IAM), as _Authorizers_ - services that allow or restrict API access to clients based on criteria such as user, roles, IP addresses, and so on. 
+AWS API Gateway offers several solutions for building scalable APIs. HTTP APIs ([link](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html)) are a simple form of API that makes proxy requests to either another HTTP endpoint or an AWS Lambda. Unlike API Gateway's REST APIs, HTTP APIs can’t leverage other AWS services, such as AWS Identity and Access Management (IAM), as _authorizers_: services that allow or restrict API access to clients based on criteria such as user, roles, IP addresses, and so on. 
 
 HTTP APIs can, however, use JSON Web Tokens (JWTs) to provide access control using a **JWT Authorizer**.
 
@@ -33,7 +33,7 @@ A benefit of JWT Authorization is the ability to pair existing identity provider
 
 In this tutorial, you’ll learn how to create add a JWT Authorizer to an HTTP API, using Auth0 as the identity provider. ​You’ll be building an HTTP API on AWS using API Gateway, a Lambda function, and DynamoDB. The API will support both GET and POST requests and read/write data from a DynamoDB table. POST requests will be restricted to authorized users and GET requests will be unauthorized, meaning anyone can access them.
 
-Because it's the holidays, your API will create and retrieve a wish list of gifts you'd like to be given! Anyone will be able to read the wish list, but only authorizerd users (e.g. you!) will be able to add items to the list.
+Because it's the holidays, your API will create and retrieve a wish list of gifts you'd like to be given! Anyone will be able to read the wish list, but only authorized users will be able to add items to the list.
 
 ## Prerequisites
 
@@ -78,7 +78,7 @@ Navigate to the [Lambda dashboard](https://console.aws.amazon.com/lambda/home) a
 
 The Lambda service provides a lot of helpful blueprints and samples, but for this tutorial you’ll be creating your Lambda's functionality from the ground up, so leave “Author from scratch” selected at the top of the form.
 
-Give your function the name “wish-list-service” and set the runtime to “Node 12.x”. In the Permissions section, open up the accordian for creating an execution role; for this tutorial, you’ll use a template for setting permissions to allow the Lambda to use the DynamoDB table you just created.
+Give your function the name “wish-list-service” and set the runtime to “Node 12.x”. In the Permissions section, open up the accordion for creating an execution role; for this tutorial, you’ll use a template for setting permissions to allow the Lambda to use the DynamoDB table you just created.
 
 For Execution Role, Select “Create a new role from AWS policy templates”. Name the role “wish-list-service-role” and, in the Policy templates dropdown, select “Simple microservice permissions”.
 
@@ -151,7 +151,7 @@ switch(event.httpMethod) {
 		
 ```
 
-Next up: POST requests. This implements a reqest to create a new item on your Wish List. The request should send three properties that you'll store in the database:
+Next up: POST requests. This implements a request to create a new item on your Wish List. The request should send three properties that you'll store in the database:
 
 * `name` (the name of the item on your wish list)
 * `description` (a helpful description of the item)
@@ -273,7 +273,7 @@ The returning JSON payload should contain a key called `Items`, the value of whi
 
 Now for the final step - setting up your Auth0 API as a JWT Authorizer. Head over to the [API Gateway dashboard](https://console.aws.amazon.com/apigateway/main/apis) and click “wish-list-service-API” to open up the API’s details page.
 
-First, click “Routes” in the left side menu. Currently, the API is configured to allow any type of request to the `wish-list-service` endpoint, so you’ll need to change that first. Click “ANY” under the “/wish-list-service” Route in the left column, then click “Edit” in the details card’s header on the right. In the dropdown, change “ANY” to “GET” and click save.
+First, navigate to the “Routes” section from the left-hand menu. Currently, the API is configured to allow any type of request to the `wish-list-service` endpoint, so you’ll need to change that first. Click “ANY” under the “/wish-list-service” Route in the left column, then click “Edit” in the details card’s header on the right. In the dropdown, change “ANY” to “GET” and click save.
 
 ![Changing the route to GET only](images/jwt5.png)
 
@@ -336,14 +336,13 @@ The moment of truth is here! Head to your Auth0 API dashboard and navigate to th
 
 We’ll be adding this to our cURL POST request as follows:
 
-```
+```bash
 curl -H "Content-Type: application/json" \
   -H "Authorization: [ACCESS_TOKEN]" \
   -X POST \
   -d '{"name": "Test Item 2", "description": "Test Description 2", "url": "https://www.ebay.com"}' \
   -i \
   https://[SUBDOMAIN].amazonaws.com/default/wish-list-service
-
 ```
 
 (One important thing to note: JWT Authorizers don’t require the `bearer` keyword in the Authorization header. The value of the header is simply the access token itself.)
@@ -354,7 +353,7 @@ That request should return a 201 status code - which means you’ve successfully
 
 In this tutorial, you’ve built a functional API using AWS Lambda, DynamoDB, and API Gateway. You’ve then added a JWT Authorizer, restricting access for POST requests to your endpoint to users that have authenticated with an Auth0 application. 
 
-From here, there are a number of next steps you could take. For example, you could expand the functional capabilities of your API in the Lambda itself, or you could refine access by adding authorization scopes within Auth0 and restricting your API endpoints or methods using role-based access control.
+From here, there are several next steps you could take. For example, you could expand the functional capabilities of your API in the Lambda itself, or you could refine access by adding authorization scopes within Auth0 and restricting your API endpoints or methods using role-based access control.
 
 The sample code used to run the lambda can be found here: https://github.com/brennanjohn/a0-aws-jwt
 

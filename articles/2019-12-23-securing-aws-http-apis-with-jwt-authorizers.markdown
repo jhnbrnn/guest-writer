@@ -19,13 +19,13 @@ related:
 ​
 ## An introduction to HTTP APIs in API Gateway
 ​
-AWS API Gateway offers several solutions for building scalable APIs. HTTP APIs ([link](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html)) are a simple form of API that makes proxy requests to either another HTTP endpoint or an AWS Lambda. Unlike API Gateway's REST APIs, HTTP APIs can’t leverage other AWS services, such as AWS Identity and Access Management (IAM), as _authorizers_: services that allow or restrict API access to clients based on criteria such as user, roles, IP addresses, and so on. 
+AWS API Gateway offers several solutions for building scalable APIs. HTTP APIs ([link](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html)) are a simple form of API that makes proxy requests to either another HTTP endpoint or an AWS Lambda. Unlike API Gateway's REST APIs, HTTP APIs can’t leverage other AWS services, such as AWS Identity and Access Management (IAM), as _Authorizers_: services that allow or restrict API access to clients based on criteria such as user, roles, IP addresses, and so on. 
 
 HTTP APIs can, however, use JSON Web Tokens (JWTs) to provide access control using a **JWT Authorizer**.
 
 ## What is a JWT Authorizer?
 ​
-A JWT Authorizer configures the endpoint of your HTTP API to expect a token, created by an Identity Provider such as Auth0, to be provided in HTTP requests to the API. The authorizer will validate the token and ensure the requesting client is allowed to access the endpoint. JWT Authorizers can also optionally restrict access based on authorization scopes in the JWT.
+A JWT Authorizer configures the endpoint of your HTTP API to expect a token, created by an Identity Provider such as Auth0, to be provided in HTTP requests to the API. The Authorizer will validate the token and ensure the requesting client is allowed to access the endpoint. JWT Authorizers can also optionally restrict access based on authorization scopes in the JWT.
 
 A benefit of JWT Authorization is the ability to pair existing identity provider solutions with the low overhead of HTTP APIs. This provides security and authorization without needing to rely on heavier processes such as AWS IAM or resource policy files.
 
@@ -291,7 +291,7 @@ First, you’ll need to configure the route to call your Lambda. To do so, click
 
 Your API now allows POST as well as GET requests to run the Lambda.
 
-Next, head to the “Authorization” section via the left-hand menu. In the left column, click “Post” under the “/wish-list-service” route, then click “Create and attach an authorizer”. Fill out the form with the following details:
+Next, head to the “Authorization” section via the left-hand menu. In the left column, click “Post” under the “/wish-list-service” route, then click “Create and Attach an Authorizer”. Fill out the form with the following details:
 
 **Name**: auth0
 **Identity source**: $request.header.Authorization (this will use the Authorization header to check for the JWT)

@@ -13,7 +13,7 @@ related:
 
 ---
 
-**TL;DR:** JSON Web Tokens (JWTs) can be used to authorize requests to HTTP APIs built on Amazon Web Services’ API Gateway. This tutorial will walk you through integrating Auth0 with such an HTTP API.
+**TL;DR:** [JSON Web Tokens (JWTs)](https://auth0.com/resources/ebooks/jwt-handbook) can be used to authorize requests to HTTP APIs built on Amazon Web Services’ API Gateway. This tutorial will walk you through integrating Auth0 with such an HTTP API.
 
 ---
 ​

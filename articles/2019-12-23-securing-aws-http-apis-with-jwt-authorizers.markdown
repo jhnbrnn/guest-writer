@@ -21,7 +21,7 @@ tags:
 ​
 ## An introduction to HTTP APIs in API Gateway
 ​
-AWS API Gateway offers several solutions for building scalable APIs. HTTP APIs ([link](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html)) are a simple form of API that makes proxy requests to either another HTTP endpoint or an AWS Lambda. Unlike API Gateway's REST APIs, HTTP APIs can’t leverage other AWS services, such as AWS Identity and Access Management (IAM), as _Authorizers_: services that allow or restrict API access to clients based on criteria such as user, roles, IP addresses, and so on. 
+AWS API Gateway offers several solutions for building scalable APIs. [AWS HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html) are a simple form of API that makes proxy requests to either another HTTP endpoint or an AWS Lambda. Unlike API Gateway's REST APIs, HTTP APIs can’t leverage other AWS services, such as AWS Identity and Access Management (IAM), as _Authorizers_: services that allow or restrict API access to clients based on criteria such as user, roles, IP addresses, and so on. 
 
 HTTP APIs can, however, use JSON Web Tokens (JWTs) to provide access control using a **JWT Authorizer**.
 

@@ -5,11 +5,13 @@ description: "A tutorial on integrating Auth0 with HTTP APIs built on AWS API Ga
 date: "2019-12-23 08:30"
 author:
   name: "John Brennan"
-  url: "jhnbrnn"
+  url: "https://github.com/jhnbrnn"
   mail: "brennan.john@mac.com"
   avatar: "https://twitter.com/jhnbrnn/profile_image?size=original"
-related:
-- 2017-11-15-an-example-of-all-possible-elements
+tags:
+- AWS
+- node
+- javascript
 
 ---
 

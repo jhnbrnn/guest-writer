@@ -15,13 +15,13 @@ tags:
 
 ---
 
-**TL;DR:** [JSON Web Tokens (JWTs)](https://auth0.com/resources/ebooks/jwt-handbook) can be used to authorize requests to HTTP APIs built on Amazon Web Services’ API Gateway. This tutorial will walk you through integrating Auth0 with such an HTTP API.
+**TL;DR:** [JSON Web Tokens (JWTs)](https://auth0.com/resources/ebooks/jwt-handbook) can be used to authorize requests to HTTP APIs built on AWS API Gateway. This tutorial will walk you through integrating Auth0 with such an HTTP API.
 
 ---
 ​
 ## An introduction to HTTP APIs in API Gateway
 ​
-AWS API Gateway offers several solutions for building scalable APIs. [AWS HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html) are a simple form of API that makes proxy requests to either another HTTP endpoint or an AWS Lambda. Unlike API Gateway's REST APIs, HTTP APIs can’t leverage other AWS services, such as AWS Identity and Access Management (IAM), as _Authorizers_: services that allow or restrict API access to clients based on criteria such as user, roles, IP addresses, and so on. 
+AWS API Gateway offers several solutions for building scalable APIs. [AWS HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html) are simple APIs that receive HTTP requests and send them to [Integrations](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-concepts.html#http-api-concepts.integrations) such as another public HTTP endpoint or an AWS Lambda. Unlike API Gateway's REST APIs, HTTP APIs can’t leverage other AWS services, such as AWS Identity and Access Management (IAM), as _Authorizers_: services that allow or restrict API access to clients based on criteria such as user, roles, IP addresses, and so on. 
 
 HTTP APIs can, however, use JSON Web Tokens (JWTs) to provide access control using a **JWT Authorizer**.
 

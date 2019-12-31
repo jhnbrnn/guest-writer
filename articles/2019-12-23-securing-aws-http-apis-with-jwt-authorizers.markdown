@@ -35,7 +35,7 @@ A benefit of JWT Authorization is the ability to pair existing identity provider
 
 In this tutorial, you’ll learn how to add a JWT Authorizer to an HTTP API, using Auth0 as the identity provider. ​You’ll be building an HTTP API on AWS using API Gateway, a Lambda function, and DynamoDB. The API will support both GET and POST requests and read/write data from a DynamoDB table. POST requests will be restricted to authorized users and GET requests will be unauthorized, meaning anyone can access them.
 
-Because it's the holidays, your API will create and retrieve a wish list of gifts you'd like to be given! Anyone will be able to read the wish list, but only authorized users will be able to add items to the list.
+Your API will manage the creation and retrieval of a simple public wish list of items, similar to Amazon's Wish List functionality. Anyone will be able to read the wish list, but only authorized users will be able to add items to the list.
 
 ## Prerequisites
 

@@ -302,6 +302,22 @@ First, navigate to the “Routes” section from the left-hand menu. Currently, 
 
 You’ve now restricted the existing behavior &mdash; allowing requests to execute the Lambda &mdash; to only work on `GET` requests.
 
+To test that your configuration works, you can make another `POST` request, as before:
+
+```bash
+$ curl -H "Content-Type: application/json" \
+  -X POST \
+  -i \
+  -d '{"name": "Test Item", "description": "Test Description", "url": "https://www.amazon.com"}' \
+  https://[SUBDOMAIN].amazonaws.com/default/wish-list-service
+```
+
+You should receive the following payload in response:
+
+```
+{"message":"Internal Server Error"}
+```
+
 Once you’re back on the Routes page, click “Create” in the left column header to create a new route. Select “POST” from the methods dropdown and set the URL to `/wish-list-service`, then click the "Create" button. 
 
 ![Adding a POST method to the route](images/jwt6.png)
@@ -313,6 +329,18 @@ First, you’ll need to configure the route to call your Lambda. To do so, click
 ![Attaching Lambda integration to your API](images/jwt7.png)
 
 Your API now allows `POST` as well as `GET` requests to run the Lambda.
+
+Run the followig cURL command to verify that this works:
+
+```bash
+$ curl -H "Content-Type: application/json" \
+  -X POST \
+  -i \
+  -d '{"name": "Another Test Item", "description": "Another Description", "url": "https://www.amazon.com"}' \
+  https://[SUBDOMAIN].amazonaws.com/default/wish-list-service
+```
+
+You should receive a `201` in response - `POST`s are working again!
 
 Next, head to the “Authorization” section via the left-hand menu. In the left column, click “Post” under the “/wish-list-service” route, then click the “Create and Attach an Authorizer” button. Fill out the form with the following details:
 
@@ -347,7 +375,7 @@ First, you should ensure the Authorizer is working properly. In your terminal wi
 ```bash
 curl -H "Content-Type: application/json" \
   -X POST \
-  -d '{"name": "Test Item 2", "description": "Test Description 2", "url": "https://www.amazon.com"}' \
+  -d '{"name": "Test Item 3", "description": "Test Description 3", "url": "https://www.amazon.com"}' \
   -i \
   https://[SUBDOMAIN].amazonaws.com/default/wish-list-service
 ```

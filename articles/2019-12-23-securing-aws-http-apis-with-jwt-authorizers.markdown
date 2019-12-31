@@ -44,12 +44,16 @@ Because it's the holidays, your API will create and retrieve a wish list of gift
 * Knowledge of Node.js (for creating the Lambda)
 	​
 ## Configure Auth0
+
 ### Create new Auth0 API
 
-Head to your Auth0 dashboard and click “APIs” in the left-hand menu. Click the “Create new API” button and fill out the form with the following values:
+Head to your [**Auth0 Dashboard**](https://manage.auth0.com/#/) and click “APIs” in the left-hand menu. Click the “Create new API” button and fill out the form with the following values:
 **Name:** AWS JWT Authorizer
+
 **Identifier:** https://auth0-jwt-authorizer.com
+
 **Signing Algorithm:** RS256 (default value)
+
 Click “Create”, and you’ll be taken to the definition page for your new API.
 
 ![an example of the Auth0 API settings](images/jwt1.png)
@@ -61,7 +65,9 @@ You’ll want to copy or write down your API’s identifier; we’ll need it lat
 For this step, we’ll be using three services in AWS:
 
 * DynamoDB (a NoSQL database to store our wish list items)
+
 * Lambda (the business logic that will power our API, implemented as a serverless function)
+
 * API Gateway (to create the public API endpoint itself and add the JWT Authorizer)
 
 ### Create DynamoDB
@@ -124,7 +130,7 @@ exports.handler = async (event, context) => {
 	switch(event.httpMethod) {
 		case "GET":
 			break;
-		case "POST:
+		case "POST":
 			break;
 		default:
 			break;
@@ -156,7 +162,9 @@ switch(event.httpMethod) {
 Next up: POST requests. This implements a request to create a new item on your Wish List. The request should send three properties that you'll store in the database:
 
 * `name` (the name of the item on your wish list)
+
 * `description` (a helpful description of the item)
+
 * `url` (a link to where the item can be purchased). 
 
 You'll also need an ID for the item to match the `id` field you created in DynamoDB. For simplicity, you can use the guaranteed-to-be-unique `awsRequestId` property from the `context` parameter provided to the handler function.
@@ -279,7 +287,7 @@ First, navigate to the “Routes” section from the left-hand menu. Currently, 
 
 ![Changing the route to GET only](images/jwt5.png)
 
-You’ve now restricted the existing behavior - allowing requests to execute the Lambda - to only work on GET requests.
+You’ve now restricted the existing behavior &mdash; allowing requests to execute the Lambda &mdash; to only work on GET requests.
 
 Once you’re back on the Routes page, click “Create” in the left column header to create a new route. Select “POST” from the methods dropdown and set the URL to “/wish-list-service”, then click Save. 
 
@@ -296,8 +304,11 @@ Your API now allows POST as well as GET requests to run the Lambda.
 Next, head to the “Authorization” section via the left-hand menu. In the left column, click “Post” under the “/wish-list-service” route, then click “Create and Attach an Authorizer”. Fill out the form with the following details:
 
 **Name**: auth0
-**Identity source**: $request.header.Authorization (this will use the Authorization header to check for the JWT)
-**Issuer URL:** https://[YOUR-DOMAIN].auth0.com (this can be found from your JWT metadata endpoint: https://[YOUR-DOMAIN].auth0.com/.well-known/openid-configuration, in the `issuer` field.)
+
+**Identity source**: `$request.header.Authorization` (this will use the Authorization header to check for the JWT)
+
+**Issuer URL:** `https://[YOUR-DOMAIN].auth0.com` (this can be found from your JWT metadata endpoint: https://[YOUR-DOMAIN].auth0.com/.well-known/openid-configuration, in the `issuer` field.)
+
 **Audience**: your Auth0 API’s unique identifier from the “Create new Auth0 API” step. If you didn’t write it down, you can find it by going to your Auth0 dashboard and navigating to the APIs page in the lefthand menu; the identifier for your API is listed on the landing page.
 
 ![Auth0 API Settings](images/jwt8.png)

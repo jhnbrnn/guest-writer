@@ -39,22 +39,22 @@ Your API will manage the creation and retrieval of a simple public wish list of 
 
 ## Prerequisites
 
-* Auth0 Account
-* AWS Account
-* Knowledge of Node.js (for creating the Lambda)
-	​
-## Configure Auth0
+In order to create the various parts of the API, you'll need an AWS account. You can [sign up for a free tier account here](https://aws.amazon.com/free/?all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc).
 
-### Create new Auth0 API
+You'll also need an Auth0 API that will work as the JWT Authorizer for your API. If you don't have one already, you can [sign up for an Auth0 account here](https://auth0.com/signup).
 
-Head to your [**Auth0 Dashboard**](https://manage.auth0.com/#/) and click “APIs” in the left-hand menu. Click the “Create new API” button and fill out the form with the following values:
+Lastly, you'll need some knowledge of modern JavaScript (ES2017 and, specifically, [async functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)) and Node.js in order to create the Lambda that will power your API.
+
+## Create a new Auth0 API
+
+Your first step will be to create a new Auth0 API. After you've signed in (or [signed up](https://auth0.com/signup)), head to your [**Auth0 Dashboard**](https://manage.auth0.com/#/) and click “APIs” in the left-hand menu. Click the “Create new API” button and fill out the form with the following values:
 **Name:** AWS JWT Authorizer
 
 **Identifier:** https://auth0-jwt-authorizer.com
 
 **Signing Algorithm:** RS256 (default value)
 
-Click “Create”, and you’ll be taken to the definition page for your new API.
+Click the “Create” button, and you’ll be taken to the definition page for your new API.
 
 ![an example of the Auth0 API settings](images/jwt1.png)
 

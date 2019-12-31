@@ -316,13 +316,21 @@ Your API now allows `POST` as well as `GET` requests to run the Lambda.
 
 Next, head to the “Authorization” section via the left-hand menu. In the left column, click “Post” under the “/wish-list-service” route, then click the “Create and Attach an Authorizer” button. Fill out the form with the following details:
 
-**Name**: auth0
+#### Name:
 
-**Identity source**: `$request.header.Authorization` (this will use the Authorization header to check for the JWT)
+auth0
 
-**Issuer URL:** `https://[YOUR-DOMAIN].auth0.com` (this can be found from your JWT metadata endpoint: https://[YOUR-DOMAIN].auth0.com/.well-known/openid-configuration, in the `issuer` field.)
+#### Identity source:
 
-**Audience**: your Auth0 API’s unique identifier from the “Create new Auth0 API” step. If you didn’t write it down, you can find it by going to your [Auth0 dashboard](https://manage.auth0.com/#/) and navigating to the APIs page in the lefthand menu; the identifier for your API is listed on the landing page.
+`$request.header.Authorization` (this will use the Authorization header to check for the JWT)
+
+#### Issuer URL:
+
+`https://[YOUR-DOMAIN].auth0.com/` (this can be found from your JWT metadata endpoint: https://[YOUR-DOMAIN].auth0.com/.well-known/openid-configuration, in the `issuer` field.)
+
+#### Audience:
+
+Your Auth0 API’s unique identifier from the “Create new Auth0 API” step. If you didn’t write it down, you can find it by going to your [Auth0 dashboard](https://manage.auth0.com/#/) and navigating to the APIs page in the lefthand menu; the identifier for your API is listed on the landing page.
 
 ![Auth0 API Settings](images/jwt8.png)
 
@@ -356,7 +364,7 @@ And you should see a `200` response.
 
 ### Get Access Token from Auth0 Dashboard
 
-The moment of truth is here! Head to your [Auth0 API dashboard](https://manage.auth0.com/#/apis) and navigate to the details page of the custom API you created back at the beginning of this tutorial. Go to the “Test” section and copy the `access_token` property from the Response section. 
+The moment of truth is here! Head to your [Auth0 API dashboard](https://manage.auth0.com/#/apis) and navigate to the details page of the custom API you created back at the beginning of this tutorial. Go to the “Test” section and click the "copy token" button in the top right of the code snippet (see screenshot below) to copy the `access_token` property from the Response section. 
 
 ![The access_token property from Auth0 test section](images/jwt10.png)
 

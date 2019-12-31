@@ -254,13 +254,19 @@ After you’ve added your code, click the orange “Save” button in the top ri
 
 There are a few different ways to create an HTTP API; for this tutorial, you’ll be creating the API from the Lambda details page in which you’ve been working. By creating it from the Lambda, AWS will configure the API’s permission settings by default, allowing it to execute the Lambda when a request is received.
 
-Scroll to the top of the page and open the “Designer” section. Click the “Add trigger” button in the section’s left side. Select “API Gateway” in the form’s dropdown, then “Create a new API” from the next dropdown that appears. In the form elements that follow, HTTP API should be selected by default, and you don’t need to change any of the settings - just head to the bottom of the form and click the “Add” button.
+Scroll to the top of the page and open the Designer section - this is a visual representation of your Lambda, plus other AWS services that are connected to it. These take the form of Triggers &mdash; various AWS services that can call your Lambda &mdash; and Destinations &mdash; services to which the Lambda's execution results can be routed. More information about this can be found in the [Function Configuration](https://docs.aws.amazon.com/lambda/latest/dg/resource-model.html) docs on AWS.
+
+In the Function Designer, click the “Add trigger” button in the diagram's left side. Select “API Gateway” in the form’s dropdown, then “Create a new API” from the next dropdown that appears. In the form elements that follow, HTTP API should be selected by default, and you don’t need to change any of the settings - just head to the bottom of the form and click the “Add” button.
 
 ![Settings for the HTTP API Trigger](images/jwt4.png)
 
-By creating the API via the triggers section, everything should automatically wire up with the Lambda, so let’s give it a test using cURL to make sure. From the Designer section of the Lambda details page, click on the new API Gateway trigger object. From the API Gateway section that appears, grab the URL of your API and open up a new terminal window.
+You should be returned to the configuration page for your Lambda. In the Designer diagram, the left branch should how contain a linked child on its left branch called API Gateway, which should be selected. Below the Function Designer, a section called API Gateway should be open and include details about your newly-created HTTP API. 
 
-First, make a `POST` request to your endpoint to create a new wish list item:
+![The newly created API in the Function Designer](images/jwt11.png)
+
+By creating the API through the Function Designer, the API should be automatically connected to the Lambda, so let’s give it a test to make sure. Grab the URL of your API from the API Gateway section and open up a new terminal window.
+
+First, make a `POST` request to your endpoint using cURL to create a new wish list item:
 
 ```bash
 $ curl -H "Content-Type: application/json" \

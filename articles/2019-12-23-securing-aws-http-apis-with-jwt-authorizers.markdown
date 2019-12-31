@@ -86,9 +86,9 @@ Navigate to the [Lambda dashboard](https://console.aws.amazon.com/lambda/home) a
 
 The Lambda service provides a lot of helpful blueprints and samples, but for this tutorial you’ll be creating your Lambda's functionality from the ground up, so leave “Author from scratch” selected at the top of the form.
 
-Give your function the name “wish-list-service” and set the runtime to “Node 12.x”. In the Permissions section, open up the accordion for creating an execution role; for this tutorial, you’ll use a template for setting permissions to allow the Lambda to use the DynamoDB table you just created.
+Give your function the name “wish-list-service” and set the runtime to `Node 12.x`. In the Permissions section, open up the accordion for creating an execution role; for this tutorial, you’ll use a template for setting permissions to allow the Lambda to use the DynamoDB table you just created.
 
-For Execution Role, Select “Create a new role from AWS policy templates”. Name the role “wish-list-service-role” and, in the Policy templates dropdown, select “Simple microservice permissions”.
+In the "Execution Role" radio group, select “Create a new role from AWS policy templates.” Name the role “wish-list-service-role” and, in the Policy templates dropdown, select “Simple microservice permissions.”
 
 ![Settings for the Lambda](images/jwt3.png)
 
@@ -254,7 +254,7 @@ After you’ve added your code, click the orange “Save” button in the top ri
 
 There are a few different ways to create an HTTP API; for this tutorial, you’ll be creating the API from the Lambda details page in which you’ve been working. By creating it from the Lambda, AWS will configure the API’s permission settings by default, allowing it to execute the Lambda when a request is received.
 
-Scroll to the top of the page and open the “Designer” section. Click the “Add trigger” button in the section’s left side. Select “API Gateway” in the form’s dropdown, then “Create a new API” from the next dropdown that appears. In the form elements that follow, HTTP API should be selected by default, and you don’t need to change any of the settings - just head to the bottom of the form and click “Add”.
+Scroll to the top of the page and open the “Designer” section. Click the “Add trigger” button in the section’s left side. Select “API Gateway” in the form’s dropdown, then “Create a new API” from the next dropdown that appears. In the form elements that follow, HTTP API should be selected by default, and you don’t need to change any of the settings - just head to the bottom of the form and click the “Add” button.
 
 ![Settings for the HTTP API Trigger](images/jwt4.png)
 
@@ -295,13 +295,13 @@ Once you’re back on the Routes page, click “Create” in the left column hea
 
 You’ll be redirected to the Routes page; click “POST” under the “/wish-list-service” route in the left column to open up the details card.
 
-First, you’ll need to configure the route to call your Lambda. To do so, click “Attach Integration” near the bottom of the details card. This will route you to the Integrations section of the API; once there, select “wish-list-service” from the dropdown of existing integrations and click “Attach Integration”.
+First, you’ll need to configure the route to call your Lambda. To do so, click “Attach Integration” near the bottom of the details card. This will route you to the Integrations section of the API; once there, select “wish-list-service” from the dropdown of existing integrations and click the “Attach Integration” button.
 
 ![Attaching Lambda integration to your API](images/jwt7.png)
 
 Your API now allows POST as well as GET requests to run the Lambda.
 
-Next, head to the “Authorization” section via the left-hand menu. In the left column, click “Post” under the “/wish-list-service” route, then click “Create and Attach an Authorizer”. Fill out the form with the following details:
+Next, head to the “Authorization” section via the left-hand menu. In the left column, click “Post” under the “/wish-list-service” route, then click the “Create and Attach an Authorizer” button. Fill out the form with the following details:
 
 **Name**: auth0
 

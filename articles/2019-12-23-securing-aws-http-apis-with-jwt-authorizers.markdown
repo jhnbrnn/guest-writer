@@ -302,7 +302,7 @@ First, navigate to the “Routes” section from the left-hand menu. Currently, 
 
 You’ve now restricted the existing behavior &mdash; allowing requests to execute the Lambda &mdash; to only work on `GET` requests.
 
-Once you’re back on the Routes page, click “Create” in the left column header to create a new route. Select “POST” from the methods dropdown and set the URL to `/wish-list-service`, then click Save. 
+Once you’re back on the Routes page, click “Create” in the left column header to create a new route. Select “POST” from the methods dropdown and set the URL to `/wish-list-service`, then click the "Create" button. 
 
 ![Adding a POST method to the route](images/jwt6.png)
 
@@ -326,7 +326,7 @@ auth0
 
 #### Issuer URL:
 
-`https://[YOUR-DOMAIN].auth0.com/` (this can be found from your JWT metadata endpoint: https://[YOUR-DOMAIN].auth0.com/.well-known/openid-configuration, in the `issuer` field.)
+This can be found from your OpenID Configuration endpoint: https://[YOUR-DOMAIN].auth0.com/.well-known/openid-configuration, in the `issuer` field.
 
 #### Audience:
 

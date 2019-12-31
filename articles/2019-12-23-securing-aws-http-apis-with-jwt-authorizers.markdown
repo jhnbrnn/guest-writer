@@ -102,7 +102,9 @@ exports.handler = async (event, context) => {
 };
 ```
 
-You’re using the `async` keyword because the code will asynchronously access DynamoDB, which you’ll see in a moment. `event` and `context` will both be used in a moment to retrieve information about the API request.
+You’re using the `async` keyword because the code will asynchronously access DynamoDB, which you’ll see in a moment. The `event` argument is a [core Lambda concept](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-concepts.html#gettingstarted-concepts-event) - it's an object representing the data for the Lambda to process, and in your case, it represents the HTTP request received from your API. An [example event from API Gateway](https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https.html) can be found in the Lambda documentation, if you're looking for a more detailed rundown of what's available in the event. The [`context` argument](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-context.html) contains useful information about the execution environment; we'll be using it for its `awsRequestId` property in a moment.
+
+`event` and `context` will both be used in a moment to retrieve information about the API request.
 
 Next, you’ll want to set up the connection between your Lambda and DynamoDB to perform your reads and writes:
 
@@ -145,10 +147,8 @@ With the scaffolding in place, it’s time to implement the `GET` case. It’s s
 // ...
 switch(event.httpMethod) {
 	case "GET":
-		// scan() will retrieve all records found in the table matching the TableName parameter
 		const data = await ddb.scan({ TableName: TABLE_NAME }).promise();
 
-		// output from the Lambda must match a specific format expected by API Gateway. Information about the format can be found here: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-output-format
 		return {
 			statusCode: 200,
             body: JSON.stringify(data),
@@ -158,6 +158,10 @@ switch(event.httpMethod) {
 		};
 		
 ```
+
+`ddb.scan()` Will retrieve all records found in a DynamoDB table; the table is specified by the `TableName` key in the function parameter.
+
+The object that the Lambda is returning adheres to a [specific format](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-output-format) for the return value, expected by API Gateway.
 
 Next up: `POST` requests. This implements a request to create a new item on your Wish List. The request should send three properties that you'll store in the database:
 

@@ -119,9 +119,9 @@ exports.handler = async (event, context) => {
 }
 ```
 
-`DocumentClient` will allow you to perform actions against your DynamoDB tables. The AWS documentation for DocumentClient can be found [here](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html).
+[`AWS.DynamoDB.DocumentClient()`](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html) creates an object that allows you to perform actions against your DynamoDB tables.
 
-Now you're ready to write your handler method. Since you’re handling both GET and POST requests in one handler, a simple `switch` statement based on the HTTP method should do the trick:
+Now you're ready to write your handler method. Since you’re handling both `GET` and `POST` requests in one handler, a simple `switch` statement based on the HTTP method should do the trick:
 
 ```js
 // ...
@@ -265,16 +265,17 @@ First, make a POST request to your endpoint to create a new wish list item:
 ```bash
 $ curl -H "Content-Type: application/json" \
   -X POST \
+  -i \
   -d '{"name": "Test Item", "description": "Test Description", "url": "https://www.amazon.com"}' \
   https://[SUBDOMAIN].amazonaws.com/default/wish-list-service
 ```
 
-You should get back a 201 response with a JSON payload containing an `id` key.
+You should get back a `201` response with a JSON payload containing an `id` key.
 
-Next, make a GET request to ensure your new item was created:
+Next, make a `GET` request to ensure your new item was created:
 
 ```bash
-$ curl https://[DOMAIN].amazonaws.com/default/wish-list-service
+$ curl -i https://[DOMAIN].amazonaws.com/default/wish-list-service
 ```
 
 The returning JSON payload should contain a key called `Items`, the value of which is an array of wish list items. Your new item will appear in that array.
@@ -289,7 +290,7 @@ First, navigate to the “Routes” section from the left-hand menu. Currently, 
 
 You’ve now restricted the existing behavior &mdash; allowing requests to execute the Lambda &mdash; to only work on GET requests.
 
-Once you’re back on the Routes page, click “Create” in the left column header to create a new route. Select “POST” from the methods dropdown and set the URL to “/wish-list-service”, then click Save. 
+Once you’re back on the Routes page, click “Create” in the left column header to create a new route. Select “POST” from the methods dropdown and set the URL to `/wish-list-service`, then click Save. 
 
 ![Adding a POST method to the route](images/jwt6.png)
 
@@ -360,7 +361,7 @@ curl -H "Content-Type: application/json" \
 
 (One important thing to note: JWT Authorizers don’t require the `bearer` keyword in the Authorization header. The value of the header is simply the access token itself.)
 
-That request should return a 201 status code - which means you’ve successfully integrated Auth0 as a JWT Authorizer on an AWS HTTP API!
+That request should return a `201` status code - which means you’ve successfully integrated Auth0 as a JWT Authorizer on an AWS HTTP API!
 
 ## Summary
 
@@ -368,6 +369,6 @@ In this tutorial, you’ve built a functional API using AWS Lambda, DynamoDB, an
 
 From here, there are several next steps you could take. For example, you could expand the functional capabilities of your API in the Lambda itself, or you could refine access by adding authorization scopes within Auth0 and restricting your API endpoints or methods using role-based access control.
 
-The sample code used to run the Lambda can be found here: https://github.com/brennanjohn/a0-aws-jwt
+The sample code used to run the Lambda can be found [in this GitHub repository](https://github.com/brennanjohn/a0-aws-jwt).
 
 Happy building!

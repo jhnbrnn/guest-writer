@@ -88,7 +88,7 @@ The Lambda service provides a lot of helpful blueprints and samples, but for thi
 
 Give your function the name “wish-list-service” and set the runtime to `Node 12.x`. In the Permissions section, open up the accordion for creating an execution role; for this tutorial, you’ll use a template for setting permissions to allow the Lambda to use the DynamoDB table you just created.
 
-In the "Execution Role" radio group, select “Create a new role from AWS policy templates.” Name the role “wish-list-service-role” and, in the Policy templates dropdown, select “Simple microservice permissions.”
+In the "Execution Role" radio group, select “Create a new role from AWS policy templates.” Name the role “wish-list-service-role” and, in the Policy templates dropdown, select “Simple microservice permissions.” This policy template will automatically create the AWS IAM role that allows your Lambda to access DynamoDB. If you're curious, you can go to the [AWS IAM Roles Dashboard](https://console.aws.amazon.com/iam/home#/roles) and click "wish-list-service-role" to understand exactly what permissions are granted.
 
 ![Settings for the Lambda](images/jwt3.png)
 

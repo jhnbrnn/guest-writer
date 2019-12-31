@@ -312,7 +312,7 @@ Next, head to the “Authorization” section via the left-hand menu. In the lef
 
 **Issuer URL:** `https://[YOUR-DOMAIN].auth0.com` (this can be found from your JWT metadata endpoint: https://[YOUR-DOMAIN].auth0.com/.well-known/openid-configuration, in the `issuer` field.)
 
-**Audience**: your Auth0 API’s unique identifier from the “Create new Auth0 API” step. If you didn’t write it down, you can find it by going to your Auth0 dashboard and navigating to the APIs page in the lefthand menu; the identifier for your API is listed on the landing page.
+**Audience**: your Auth0 API’s unique identifier from the “Create new Auth0 API” step. If you didn’t write it down, you can find it by going to your [Auth0 dashboard](https://manage.auth0.com/#/) and navigating to the APIs page in the lefthand menu; the identifier for your API is listed on the landing page.
 
 ![Auth0 API Settings](images/jwt8.png)
 
@@ -346,7 +346,7 @@ And you should see a `200` response.
 
 ### Get Access Token from Auth0 Dashboard
 
-The moment of truth is here! Head to your Auth0 API dashboard and navigate to the details page of the custom API you created back at the beginning of this tutorial. Go to the “Test” section and copy the `access_token` property from the example response. 
+The moment of truth is here! Head to your [Auth0 API dashboard](https://manage.auth0.com/#/apis) and navigate to the details page of the custom API you created back at the beginning of this tutorial. Go to the “Test” section and copy the `access_token` property from the Response section. 
 
 ![The access_token property from Auth0 test section](images/jwt10.png)
 

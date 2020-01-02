@@ -21,13 +21,13 @@ tags:
 
 ## An introduction to HTTP APIs in API Gateway
 
-AWS API Gateway offers several solutions for building scalable APIs. [AWS HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html) are simple APIs that receive HTTP requests and send them to [Integrations](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-concepts.html#http-api-concepts.integrations) such as another public HTTP endpoint or an AWS Lambda. Unlike API Gateway's REST APIs, HTTP APIs can’t leverage other AWS services, such as AWS Identity and Access Management (IAM), as _Authorizers_: services that allow or restrict API access to clients based on criteria such as user, roles, IP addresses, and so on. 
+AWS API Gateway offers several solutions for building scalable APIs. [AWS HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html) are simple APIs that receive HTTP requests and send them to [Integrations](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-concepts.html#http-api-concepts.integrations) such as another public HTTP endpoint or an AWS Lambda. Unlike API Gateway's REST APIs, HTTP APIs can’t leverage other AWS services, such as AWS Identity and Access Management (IAM), as _Authorizers_: services that allow or restrict API access to clients based on criteria such as user, roles, IP addresses, and so on.
 
 HTTP APIs can, however, use JSON Web Tokens (JWTs) to provide access control using a **JWT Authorizer**.
 
 ## What is a JWT Authorizer?
 
-A JWT Authorizer configures the endpoint of your HTTP API to expect a token, created by an Identity Provider such as Auth0, to be provided in HTTP requests to the API. The Authorizer will validate the token and ensure the requesting client is allowed to access the endpoint. JWT Authorizers can also optionally restrict access based on authorization scopes in the JWT.
+Using a JWT Authorizer, you can configure an endpoint of your HTTP API to require the presence of a JWT on any request made to that endpoint. The Authorizer will validate the token to determine if the client making the request is allowed to access the endpoint. JWT Authorizers can also optionally restrict access based on authorization scopes in the JWT.
 
 A benefit of JWT Authorization is the ability to pair existing identity provider solutions with the low overhead of HTTP APIs. This provides security and authorization without needing to rely on heavier processes such as AWS IAM or resource policy files.
 
@@ -156,7 +156,7 @@ switch(event.httpMethod) {
 				'Content-Type': 'application/json',
 			}
 		};
-		
+
 ```
 
 `ddb.scan()` Will retrieve all records found in a DynamoDB table; the table is specified by the `TableName` key in the function parameter.
@@ -169,7 +169,7 @@ Next up: `POST` requests. This implements a request to create a new item on your
 
 * `description` (a helpful description of the item)
 
-* `url` (a link to where the item can be purchased). 
+* `url` (a link to where the item can be purchased).
 
 You'll also need an ID for the item to match the `id` field you created in DynamoDB. For simplicity, you can use the guaranteed-to-be-unique `awsRequestId` property from the `context` parameter provided to the handler function.
 
@@ -192,7 +192,7 @@ switch(event.httpMethod) {
 				description
 			}
 		}).promise();
-            
+
 		return {
 			statusCode: 201,
 			body: JSON.stringify({
@@ -205,7 +205,7 @@ switch(event.httpMethod) {
 ```
 
 And that’s it! Here’s a complete look at your Lambda’s code:
- 
+
 ```js
 const AWS = require('aws-sdk');
 
@@ -226,7 +226,7 @@ exports.handler = async (event, context) => {
       };
     case "POST":
       const {name, url, description } = event.body;
-            
+
       await ddb.put({
         TableName: TABLE_NAME,
         Item: {
@@ -236,7 +236,7 @@ exports.handler = async (event, context) => {
           description
         }
       }).promise();
-            
+
       return {
         statusCode: 201,
         body: JSON.stringify({
@@ -264,7 +264,7 @@ In the Function Designer, click the “Add trigger” button in the diagram's le
 
 ![Settings for the HTTP API Trigger](images/jwt4.png)
 
-You should be returned to the configuration page for your Lambda. In the Designer diagram, the left branch should how contain a linked child on its left branch called API Gateway, which should be selected. Below the Function Designer, a section called API Gateway should be open and include details about your newly-created HTTP API. 
+You should be returned to the configuration page for your Lambda. In the Designer diagram, the left branch should how contain a linked child on its left branch called API Gateway, which should be selected. Below the Function Designer, a section called API Gateway should be open and include details about your newly-created HTTP API.
 
 ![The newly created API in the Function Designer](images/jwt11.png)
 
@@ -318,7 +318,7 @@ You should receive the following payload in response:
 {"message":"Internal Server Error"}
 ```
 
-Once you’re back on the Routes page, click “Create” in the left column header to create a new route. Select “POST” from the methods dropdown and set the URL to `/wish-list-service`, then click the "Create" button. 
+Once you’re back on the Routes page, click “Create” in the left column header to create a new route. Select “POST” from the methods dropdown and set the URL to `/wish-list-service`, then click the "Create" button.
 
 ![Adding a POST method to the route](images/jwt6.png)
 
@@ -392,7 +392,7 @@ And you should see a `200` response.
 
 ### Get Access Token from Auth0 Dashboard
 
-The moment of truth is here! Head to your [Auth0 API dashboard](https://manage.auth0.com/#/apis) and navigate to the details page of the custom API you created back at the beginning of this tutorial. Go to the “Test” section and click the "copy token" button in the top right of the code snippet (see screenshot below) to copy the `access_token` property from the Response section. 
+The moment of truth is here! Head to your [Auth0 API dashboard](https://manage.auth0.com/#/apis) and navigate to the details page of the custom API you created back at the beginning of this tutorial. Go to the “Test” section and click the "copy token" button in the top right of the code snippet (see screenshot below) to copy the `access_token` property from the Response section.
 
 ![The access_token property from Auth0 test section](images/jwt10.png)
 
@@ -413,7 +413,7 @@ That request should return a `201` status code - which means you’ve successful
 
 ## Summary
 
-In this tutorial, you’ve built a functional API using AWS Lambda, DynamoDB, and API Gateway. You’ve then added a JWT Authorizer, restricting access for `POST` requests to your endpoint to users that have authenticated with an Auth0 application. 
+In this tutorial, you’ve built a functional API using AWS Lambda, DynamoDB, and API Gateway. You’ve then added a JWT Authorizer, restricting access for `POST` requests to your endpoint to users that have authenticated with an Auth0 application.
 
 From here, there are several next steps you could take. For example, you could expand the functional capabilities of your API in the Lambda itself, or you could refine access by adding authorization scopes within Auth0 and restricting your API endpoints or methods using role-based access control.
 

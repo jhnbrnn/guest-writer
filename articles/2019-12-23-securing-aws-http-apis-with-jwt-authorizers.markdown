@@ -39,7 +39,7 @@ REST APIs can leverage other AWS services, such as AWS Identity and Access Manag
 
 ## JWT Authorizers
 
-A JWT Authorizer is built on top of the [OpenID Connect (OIDC)](https://openid.net/specs/openid-connect-core-1_0.html) and [OAuth 2.0](https://oauth.net/2/) protocols to provide easy, industry-standard authentication to your HTTP API. Once configured, requests to your API's endpoints must include a JWT, which is validated by the Authorizer to ensure the client making the request is allowed to access the endpoint. JWT Authorizers can also optionally restrict access based on authorization scopes in the JWT.
+A JWT Authorizer is built on top of the [OpenID Connect (OIDC)](https://openid.net/specs/openid-connect-core-1_0.html) and [OAuth 2.0](https://oauth.net/2/) protocols to provide easy, industry-standard authentication to your HTTP API. Once configured, requests to your API's endpoints must include a JWT access token, which is validated by the Authorizer to ensure the client making the request is allowed to access the endpoint. JWT Authorizers can also optionally restrict access based on authorization scopes in the JWT.
 
 JWTs can be issued by Amazon Cognito (another AWS service), but you can also configure the API to use an external identity provider as the JWTs issuer - that's a key benefit of the authorizer using the OIDC/OAuth 2.0 standards. If you already rely on an existing identity provider solution, pairing it with an HTTP API is pretty straightforward - and that's what you'll be doing in this tutorial!
 

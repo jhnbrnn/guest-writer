@@ -19,17 +19,29 @@ tags:
 
 ---
 
-## An introduction to HTTP APIs in API Gateway
+## An introduction to AWS API Gateway
 
-AWS API Gateway offers several solutions for building scalable APIs. [AWS HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html) are simple APIs that receive HTTP requests and send them to [Integrations](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-concepts.html#http-api-concepts.integrations) such as another public HTTP endpoint or an AWS Lambda. Unlike API Gateway's REST APIs, HTTP APIs can’t leverage other AWS services, such as AWS Identity and Access Management (IAM), as _Authorizers_: services that allow or restrict API access to clients based on criteria such as user, roles, IP addresses, and so on.
+In the sizeable toolkit that AWS provides, one of the easiest ways to quickly spin up custom APIs is through the API Gateway service. API Gateway is a great way to create scalable, publicly-accessible APIs that connect to other services, either on AWS or other third-party providers (hence the _"Gateway"_ portion of the service's name).
 
-HTTP APIs can, however, use JSON Web Tokens (JWTs) to provide access control using a **JWT Authorizer**.
+API Gateway offers three several solutions for building APIs. Their most recent offering is a simpler, low-cost, low-latency option called [HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html).
 
-## What is a JWT Authorizer?
+## HTTP APIs vs REST APIs
 
-Using a JWT Authorizer, you can configure an endpoint of your HTTP API to require the presence of a JWT on any request made to that endpoint. The Authorizer will validate the token to determine if the client making the request is allowed to access the endpoint. JWT Authorizers can also optionally restrict access based on authorization scopes in the JWT.
+HTTP APIs differ from REST APIs – API Gateway's original offering – in a number of ways. In general, HTTP APIs offer fewer configuration options than REST APIs, optimizing for low-latency operations. [Integrations](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-concepts.html#http-api-concepts.integrations) are one such area: REST APIs can connect to a number of services, wheras HTTP APIs can only connect to another public HTTP endpoint or an AWS Lambda.
 
-A benefit of JWT Authorization is the ability to pair existing identity provider solutions with the low overhead of HTTP APIs. This provides security and authorization without needing to rely on heavier processes such as AWS IAM or resource policy files.
+(If you're curious, the [API Gateway Developer Guide](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vs-rest.html) provides a full comparison between the two solutions.)
+
+## API Gateway Authorizers
+
+Another key difference between REST and HTTP APIs on API Gateway is their user of _Authorizers_: services that allow or restrict API access to clients based on criteria such as user, roles, IP addresses, and so on. If you're building a public API, restricting access to authorized users is likely going to be needed at some point.
+
+REST APIs can leverage other AWS services, such as AWS Identity and Access Management (IAM), as Authorizers. HTTP APIs can't use most of those services, but unlike REST APIs, they provide out-of-the-box support for using of JSON Web Tokens (JWTs) to provide access control using a **JWT Authorizer**.
+
+## JWT Authorizers
+
+A JWT Authorizer is built on top of the [OpenID Connect (OIDC)](https://openid.net/specs/openid-connect-core-1_0.html) and [OAuth 2.0](https://oauth.net/2/) protocols to provide easy, industry-standard authentication to your HTTP API. Once configured, requests to your API's endpoints must include a JWT, which is validated by the Authorizer to ensure the client making the request is allowed to access the endpoint. JWT Authorizers can also optionally restrict access based on authorization scopes in the JWT.
+
+JWTs can be issued by Amazon Cognito (another AWS service), but you can also configure the API to use an external identity provider as the JWTs issuer - that's a key benefit of the authorizer using the OIDC/OAuth 2.0 standards. If you already rely on an existing identity provider solution, pairing it with an HTTP API is pretty straightforward - and that's what you'll be doing in this tutorial!
 
 ## What will you build?
 
@@ -84,7 +96,7 @@ That’s all you need to do for setup, so it’s time to head over to Lambdas!
 
 Navigate to the [Lambda dashboard](https://console.aws.amazon.com/lambda/home) and click the “Create function” button in the table’s top right corner.
 
-The Lambda service provides a lot of helpful blueprints and samples, but for this tutorial you’ll be creating your Lambda's functionality from the ground up, so leave “Author from scratch” selected at the top of the form.
+The Lambda service provides a lot of helpful blueprints and samples, but for this tutorial, you’ll be creating your Lambda's functionality from the ground up, so leave “Author from scratch” selected at the top of the form.
 
 Give your function the name “wish-list-service” and set the runtime to `Node 12.x`. In the Permissions section, open up the accordion for creating an execution role; for this tutorial, you’ll use a template for setting permissions to allow the Lambda to use the DynamoDB table you just created.
 

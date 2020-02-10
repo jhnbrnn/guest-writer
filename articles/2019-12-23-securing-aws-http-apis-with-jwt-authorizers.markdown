@@ -6,7 +6,7 @@ date: "2019-12-23 08:30"
 author:
   name: "John Brennan"
   url: "https://github.com/jhnbrnn"
-  mail: "brennan.john@mac.com"
+  mail: "john.brennan@auth0.com"
   avatar: "https://twitter.com/jhnbrnn/profile_image?size=original"
 tags:
 - AWS
